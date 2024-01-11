@@ -1,12 +1,16 @@
 import express from "express";
 import { config } from "dotenv";
+import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import { router } from "./routes";
 
 config();
 
 const app = express();
 
 app.disable("x-powered-by");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
 mongoose
@@ -17,6 +21,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+app.use(router);
 
 const { PORT } = process.env;
 app.listen(PORT, () => {
