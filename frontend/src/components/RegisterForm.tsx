@@ -40,9 +40,9 @@ function RegisterForm() {
         disabled={true}
       />
       <br />
-      <input id="botao-formulario" type="submit" value="Register customer" />
+      <input id="form-button" type="submit" value="Register customer" />
       <br />
-      <input id="botao-formulario" type="reset" value="Reset fields" />
+      <input id="form-button" type="reset" value="Reset fields" />
     </form>
   );
 }
