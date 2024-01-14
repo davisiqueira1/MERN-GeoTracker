@@ -33,13 +33,8 @@ function RegisterForm() {
         name="address"
       />
       <br />
-      <FormField label="Latitude" placeholder="Latitude" name="lat" readOnly />
-      <FormField
-        label="Longitude"
-        placeholder="Longitude"
-        name="lng"
-        readOnly
-      />
+      <FormField label="Latitude" value={latitude} name="lat" readOnly />
+      <FormField label="Longitude" value={longitude} name="lng" readOnly />
       <input
         style={{ backgroundColor: "green" }}
         className="form-button"
