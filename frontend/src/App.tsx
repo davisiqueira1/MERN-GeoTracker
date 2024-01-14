@@ -11,7 +11,7 @@ function App() {
         </div>
         <div id="map-container">
           <Map />
-          <div id="table"></div>
+          <div id="table-container"></div>
         </div>
       </div>
     </div>
