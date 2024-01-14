@@ -42,7 +42,7 @@ function RegisterForm() {
       <br />
       <input id="botao-formulario" type="submit" value="Register customer" />
       <br />
-      <input id="botao-formulario" type="submit" value="Reset fields" />
+      <input id="botao-formulario" type="reset" value="Reset fields" />
     </form>
   );
 }
