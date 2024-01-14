@@ -1,4 +1,5 @@
 import { useState, FormEvent } from "react";
+import FormField from "./FormField";
 
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number | undefined>(undefined);
@@ -22,20 +23,23 @@ function RegisterForm() {
 
   return (
     <form id="form" onSubmit={submitForm}>
-      <label className="form-label">Customer name</label>
-      <input required className="field" placeholder="Name" name="name" />
+      <FormField label="Customer name" placeholder="Name" name="name" />
       <br />
-      <label className="form-label">Delivery weight</label>
-      <input required className="field" placeholder="Weight" name="weight" />
+      <FormField label="Delivery weight" placeholder="Weight" name="weight" />
       <br />
-      <label className="form-label">Customer address</label>
-      <input required className="field" placeholder="Address" name="address" />
+      <FormField
+        label="Customer address"
+        placeholder="Address"
+        name="address"
+      />
       <br />
-      <label className="form-label">Latitude</label>
-      <input className="field" name="lat" value={latitude} readOnly />
-      <label className="form-label">Longitude</label>
-      <input className="field" name="lng" value={longitude} readOnly />
-      <br />
+      <FormField label="Latitude" placeholder="Latitude" name="lat" readOnly />
+      <FormField
+        label="Longitude"
+        placeholder="Longitude"
+        name="lng"
+        readOnly
+      />
       <input
         style={{ backgroundColor: "green" }}
         className="form-button"
