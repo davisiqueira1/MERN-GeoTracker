@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import FormField from "./FormField";
+import axios from "../services/axios";
 
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number | undefined>(undefined);
@@ -35,6 +36,7 @@ function RegisterForm() {
       <br />
       <FormField label="Latitude" value={latitude} name="lat" readOnly />
       <FormField label="Longitude" value={longitude} name="lng" readOnly />
+      <br />
       <input
         style={{ backgroundColor: "green" }}
         className="form-button"
