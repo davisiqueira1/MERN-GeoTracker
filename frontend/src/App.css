@@ -5,13 +5,39 @@ body {
 #container {
   background: linear-gradient(71deg, #feaf00 19.35%, #f8d442 90.12%);
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100vh;
 }
 
+#form-container {
+  background-color: white;
+  height: 85%;
+  width: 25%;
+  min-width: 300px;
+  min-height: 600px;
+}
+
 #map {
-  height: 800px;
-  width: 800px;
+  width: 100%;
+  height: 70%;
+}
+
+#map-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  height: 85%;
+  width: 40%;
+  min-width: 450px;
+  min-height: 600px;
+}
+
+#table {
+  background-color: grey;
+  width: 100%;
+  height: 30%;
 }

@@ -4,7 +4,11 @@ import Map from "./components/Map";
 function App() {
   return (
     <div id="container">
-      <Map />
+      <div id="form-container"></div>
+      <div id="map-container">
+        <Map />
+        <div id="table"></div>
+      </div>
     </div>
   );
 }
