@@ -3,18 +3,18 @@ import { Key } from "react";
 interface IDelivery {
   _id: Key;
   name: String;
-  weight: Number;
+  weight: number;
   address: {
     street?: String;
-    number?: Number;
+    number?: number;
     neighborhood?: String;
     complement?: String;
     city?: String;
     state?: String;
     country?: String;
     geolocation: {
-      latitude: Number;
-      longitude: Number;
+      latitude: number;
+      longitude: number;
     };
   };
 }
