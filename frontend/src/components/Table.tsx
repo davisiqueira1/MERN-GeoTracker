@@ -8,7 +8,7 @@ const DeliveryTable = () => {
 
   useEffect(() => {
     backendAxios
-      .get("/")
+      .get("/deliveries")
       .then((response) => {
         console.log(response.data);
         setDeliveries(response.data);

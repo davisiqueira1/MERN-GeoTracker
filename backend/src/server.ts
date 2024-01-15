@@ -4,9 +4,12 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import { router } from "./routes";
 
+var cors = require("cors");
+
 config();
 
 const app = express();
+app.use(cors());
 
 app.disable("x-powered-by");
 app.use(bodyParser.json());
