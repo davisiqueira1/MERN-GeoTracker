@@ -1,4 +1,7 @@
+import { Key } from "react";
+
 interface IDelivery {
+  _id: Key;
   name: String;
   weight: Number;
   address: {

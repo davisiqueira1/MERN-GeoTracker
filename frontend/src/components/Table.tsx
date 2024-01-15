@@ -38,7 +38,7 @@ const DeliveryTable = () => {
       </thead>
       <tbody>
         {deliveries.map((delivery: IDelivery) => (
-          <tr>
+          <tr key={delivery._id}>
             <td>{delivery.name}</td>
             <td>{delivery.address.street}</td>
             <td>{delivery.address.city}</td>
