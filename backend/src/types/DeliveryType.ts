@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const deliverieSchema = z.object({
+const deliverySchema = z.object({
   name: z.string(),
   weight: z.number(),
   address: z.object({
@@ -18,6 +18,6 @@ const deliverieSchema = z.object({
   }),
 });
 
-type CreateDeliverieType = z.infer<typeof deliverieSchema>;
+type CreateDeliveryType = z.infer<typeof deliverySchema>;
 
-export { CreateDeliverieType };
+export { CreateDeliveryType };

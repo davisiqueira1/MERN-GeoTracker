@@ -1,17 +1,17 @@
 import { Router } from "express";
-import deliverieService from "../services/DeliverieService";
-import { CreateDeliverieType } from "@/types/DeliverieType";
+import deliveryService from "../services/DeliveryService";
+import { CreateDeliveryType } from "@/types/DeliveryType";
 import { ApiError } from "../errors/ApiError";
 
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const deliveries = await deliverieService.getDeliveries();
+  const deliveries = await deliveryService.getDeliveries();
   res.json(deliveries);
 });
 
 router.post("/", async (req, res) => {
-  const deliverie: CreateDeliverieType = {
+  const delivery: CreateDeliveryType = {
     name: req.body.name,
     weight: req.body.weight,
     address: {
@@ -29,8 +29,8 @@ router.post("/", async (req, res) => {
     },
   };
   try {
-    await deliverieService.createDeliverie(deliverie);
-    res.status(201).send(deliverie);
+    await deliveryService.createDelivery(delivery);
+    res.status(201).send(delivery);
   } catch (err) {
     console.log(err);
     const error = err as ApiError;
@@ -41,8 +41,8 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    await deliverieService.deleteDeliverie(id);
-    res.send({ message: "Deliverie deleted" });
+    await deliveryService.deleteDelivery(id);
+    res.send({ message: "Delivery deleted" });
   } catch (err) {
     console.log(err);
     const error = err as ApiError;
@@ -50,4 +50,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-export { router as deliverieController };
+export { router as deliveryController };
