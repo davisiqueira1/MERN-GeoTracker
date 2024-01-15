@@ -1,5 +1,12 @@
 // docs: https://react-leaflet.js.org/docs/example-events/
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
+import { LatLng } from "leaflet";
 import { backendAxios } from "../services/axios";
 import { useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
@@ -7,12 +14,12 @@ import { LatLngTuple } from "leaflet";
 
 const Map = () => {
   const [deliveries, setDeliveries] = useState<IDelivery[]>([]);
+  let center = [-23.5, -46.65];
 
   useEffect(() => {
     backendAxios
       .get("/deliveries")
       .then((response) => {
-        console.log(response.data);
         setDeliveries(response.data);
       })
       .catch((err) => {
@@ -20,18 +27,32 @@ const Map = () => {
       });
   }, []);
 
-  function mapCenter() {
-    if (deliveries.length === 0) return [-23.5, -46.5] as LatLngTuple;
-    let delivery = deliveries[0];
-    let lat = delivery.address.geolocation.latitude;
-    let lng = delivery.address.geolocation.longitude;
-    return [lat, lng] as LatLngTuple;
+  function LocationMarker() {
+    const [position, setPosition] = useState<LatLng | null>(null);
+    const map = useMapEvents({
+      click() {
+        map.locate();
+      },
+      locationfound(e) {
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      },
+    });
+
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>Sua posição</Popup>
+      </Marker>
+    );
   }
 
-  const center = mapCenter();
-
   return (
-    <MapContainer id="map" center={center} zoom={17} scrollWheelZoom={true}>
+    <MapContainer
+      id="map"
+      center={center as LatLngTuple}
+      zoom={10}
+      scrollWheelZoom={true}
+    >
       <>
         {deliveries.map((delivery: IDelivery) => (
           <Marker
@@ -49,6 +70,7 @@ const Map = () => {
           </Marker>
         ))}
       </>
+      <LocationMarker />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
