@@ -63,10 +63,13 @@ function RegisterForm() {
         "Enter your address and press the 'Search address' button"
       );
 
+    delivery.name = name;
+    delivery.weight = weight;
+
     backendAxios
       .post("/deliveries", delivery)
       .then(() => {
-        console.log("Delivery registered");
+        console.log("Delivery registered", delivery);
       })
       .catch((err) => {
         console.log(err);

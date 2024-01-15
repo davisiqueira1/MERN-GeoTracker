@@ -1,12 +1,14 @@
 // docs: https://react-leaflet.js.org/docs/example-events/
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { backendAxios } from "../services/axios";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
 import { LatLngTuple } from "leaflet";
 
+type DeliveryTableProps = IDelivery & { _id: Key };
+
 const Map = () => {
-  const [deliveries, setDeliveries] = useState<IDelivery[]>([]);
+  const [deliveries, setDeliveries] = useState<DeliveryTableProps[]>([]);
 
   useEffect(() => {
     backendAxios
@@ -33,7 +35,7 @@ const Map = () => {
   return (
     <MapContainer id="map" center={center} zoom={17} scrollWheelZoom={true}>
       <>
-        {deliveries.map((delivery: IDelivery) => (
+        {deliveries.map((delivery: DeliveryTableProps) => (
           <Marker
             key={delivery._id}
             position={[
