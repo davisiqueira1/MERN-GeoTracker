@@ -1,6 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import FormField from "./FormField";
-import axios from "../services/axios";
+import { backendAxios, googleAxios } from "../services/axios";
+import { AxiosResponse } from "axios";
 
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number>(0);
@@ -28,11 +29,20 @@ function RegisterForm() {
   };
 
   const searchAdress = () => {
-    setRegistrable(true); //
-    console.log(address);
-    // example
-    setLatitude(12.1);
-    setLongitude(25.12);
+    const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+    googleAxios
+      .get(`/json?address=${address}&key=${googleApiKey}`)
+      .then((response: AxiosResponse) => {
+        if (response.data.status !== "OK") throw new Error("Invalid address");
+
+        setRegistrable(true); //
+        console.log(response.data);
+        setLatitude(response.data.results[0].geometry.location.lat);
+        setLongitude(response.data.results[0].geometry.location.lng);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
