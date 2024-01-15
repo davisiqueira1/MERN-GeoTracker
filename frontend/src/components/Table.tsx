@@ -1,9 +1,11 @@
 import { backendAxios } from "../services/axios";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
 
+type DeliveryTableProps = IDelivery & { _id: Key };
+
 const DeliveryTable = () => {
-  const [deliveries, setDeliveries] = useState<IDelivery[]>([]);
+  const [deliveries, setDeliveries] = useState<DeliveryTableProps[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const DeliveryTable = () => {
         </tr>
       </thead>
       <tbody>
-        {deliveries.map((delivery: IDelivery) => (
+        {deliveries.map((delivery: DeliveryTableProps) => (
           <tr key={delivery._id}>
             <td>{delivery.name}</td>
             <td>{delivery.address.street}</td>

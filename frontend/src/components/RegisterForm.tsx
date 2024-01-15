@@ -2,6 +2,8 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import FormField from "./FormField";
 import { backendAxios, googleAxios } from "../services/axios";
 import { AxiosResponse } from "axios";
+import IDelivery from "../interface/IDelivery";
+import IAddressComponents from "../interface/IAddressComponents";
 
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number>(0);
@@ -10,12 +12,46 @@ function RegisterForm() {
   const [weight, setWeight] = useState<number>(0);
   const [address, setAddress] = useState<string>("");
   const [registrable, setRegistrable] = useState<boolean>(false);
+  const [delivery, setDelivery] = useState<IDelivery>({} as IDelivery);
+
+  const getAddressComponents = (
+    address_components: Array<IAddressComponents>
+  ) => {
+    const components = {
+      administrative_area_level_2: undefined,
+      administrative_area_level_1: undefined,
+      subpremise: undefined,
+      country: undefined,
+      neighborhood: undefined,
+      street_number: undefined,
+      route: undefined,
+    } as { [key: string]: string | undefined };
+
+    Object.keys(components).forEach((key) => {
+      const component = address_components.find((component) => {
+        return component.types.includes(key);
+      });
+      if (component) components[key] = component.long_name;
+    });
+
+    return {
+      city: components.administrative_area_level_2,
+      state: components.administrative_area_level_1,
+      complement: components.subpremise,
+      country: components.country,
+      neighborhood: components.neighborhood,
+      number:
+        Number.parseFloat(components.street_number as string) || undefined,
+      street: components.route,
+    };
+  };
 
   const resetForm = () => {
     /*
       default event handler for reset button will not reset the values of latitude and longitude
       so we have to do it
     */
+    setRegistrable(false);
     setLatitude(0);
     setLongitude(0);
   };
@@ -26,6 +62,18 @@ function RegisterForm() {
       throw new Error(
         "Enter your address and press the 'Search address' button"
       );
+
+    delivery.name = name;
+    delivery.weight = weight;
+
+    backendAxios
+      .post("/deliveries", delivery)
+      .then(() => {
+        console.log("Delivery registered", delivery);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const searchAdress = () => {
@@ -36,7 +84,24 @@ function RegisterForm() {
         if (response.data.status !== "OK") throw new Error("Invalid address");
 
         setRegistrable(true);
-        console.log(response.data);
+
+        const addressComponents = response.data.results[0].address_components;
+
+        const delivery: IDelivery = {
+          name,
+          weight,
+          address: {
+            ...getAddressComponents(addressComponents),
+            geolocation: {
+              latitude: response.data.results[0].geometry.location.lat,
+              longitude: response.data.results[0].geometry.location.lng,
+            },
+          },
+        };
+
+        console.log(delivery);
+        setDelivery(delivery);
+
         setLatitude(response.data.results[0].geometry.location.lat);
         setLongitude(response.data.results[0].geometry.location.lng);
       })

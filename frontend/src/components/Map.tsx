@@ -8,12 +8,14 @@ import {
 } from "react-leaflet";
 import { LatLng } from "leaflet";
 import { backendAxios } from "../services/axios";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
 import { LatLngTuple } from "leaflet";
 
+type DeliveryTableProps = IDelivery & { _id: Key };
+
 const Map = () => {
-  const [deliveries, setDeliveries] = useState<IDelivery[]>([]);
+  const [deliveries, setDeliveries] = useState<DeliveryTableProps[]>([]);
   let center = [-23.5, -46.65];
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const Map = () => {
       scrollWheelZoom={true}
     >
       <>
-        {deliveries.map((delivery: IDelivery) => (
+        {deliveries.map((delivery: DeliveryTableProps) => (
           <Marker
             key={delivery._id}
             position={[
