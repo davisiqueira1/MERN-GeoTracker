@@ -6,6 +6,8 @@ import { AxiosResponse } from "axios";
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const [weight, setWeight] = useState<number>(0);
   const [address, setAddress] = useState<string>("");
   const [registrable, setRegistrable] = useState<boolean>(false);
 
@@ -20,12 +22,10 @@ function RegisterForm() {
 
   const submitForm = (e: FormEvent) => {
     e.preventDefault();
-    if (registrable) console.log("register customer");
-    else console.log("do nothing");
-  };
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
+    if (!registrable)
+      throw new Error(
+        "Enter your address and press the 'Search address' button"
+      );
   };
 
   const searchAdress = () => {
@@ -35,7 +35,7 @@ function RegisterForm() {
       .then((response: AxiosResponse) => {
         if (response.data.status !== "OK") throw new Error("Invalid address");
 
-        setRegistrable(true); //
+        setRegistrable(true);
         console.log(response.data);
         setLatitude(response.data.results[0].geometry.location.lat);
         setLongitude(response.data.results[0].geometry.location.lng);
@@ -47,13 +47,29 @@ function RegisterForm() {
 
   return (
     <form id="form" onSubmit={submitForm}>
-      <FormField label="Customer name" placeholder="Name" name="name" />
+      <FormField
+        label="Customer name"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setName(e.target.value);
+        }}
+        placeholder="Name"
+        name="name"
+      />
       <br />
-      <FormField label="Delivery weight" placeholder="Weight" name="weight" />
+      <FormField
+        label="Delivery weight"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setWeight(Number.parseFloat(e.target.value));
+        }}
+        placeholder="Weight"
+        name="weight"
+      />
       <br />
       <FormField
         label="Customer address"
-        onChange={onChange}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setAddress(e.target.value);
+        }}
         placeholder="Address"
         name="address"
       />
