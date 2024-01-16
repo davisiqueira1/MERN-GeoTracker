@@ -34,4 +34,17 @@ const deleteDelivery = async (id: string) => {
   }
 };
 
-export default { getDeliveries, createDelivery, deleteDelivery };
+const deleteAllDeliveries = async () => {
+  try {
+    await Delivery.deleteMany({});
+  } catch (err) {
+    throw new ApiError("Error on delete all deliveries", 400);
+  }
+};
+
+export default {
+  getDeliveries,
+  createDelivery,
+  deleteDelivery,
+  deleteAllDeliveries,
+};

@@ -50,4 +50,15 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.delete("/", async (req, res) => {
+  try {
+    await deliveryService.deleteAllDeliveries();
+    res.send({ message: "All deliveries deleted" });
+  } catch (err) {
+    console.log(err);
+    const error = err as ApiError;
+    res.status(error.statusCode).send({ message: error.message });
+  }
+});
+
 export { router as deliveryController };
