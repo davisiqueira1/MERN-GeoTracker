@@ -141,6 +141,7 @@ function RegisterForm() {
           setWeight(Number.parseFloat(e.target.value));
         }}
         type="number"
+        step={0.01}
         placeholder="Weight"
         name="weight"
       />

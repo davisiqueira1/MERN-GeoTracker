@@ -41,12 +41,16 @@ const DeliveryTable = () => {
         {deliveries.map((delivery: DeliveryTableProps) => (
           <tr key={delivery._id}>
             <td>{delivery.name}</td>
-            <td>{delivery.address.street}</td>
-            <td>{delivery.address.city}</td>
+            <td>{delivery.address.street || "-"}</td>
+            <td>{delivery.address.city || "-"}</td>
             <td>{delivery.address.country}</td>
-            <td>{delivery.weight.toString()}</td>
-            <td>{delivery.address.geolocation.latitude.toString()}</td>
-            <td>{delivery.address.geolocation.longitude.toString()}</td>
+            <td>{delivery.weight.toPrecision(4).toString()}</td>
+            <td>
+              {delivery.address.geolocation.latitude.toPrecision(6).toString()}
+            </td>
+            <td>
+              {delivery.address.geolocation.longitude.toPrecision(6).toString()}
+            </td>
           </tr>
         ))}
       </tbody>
