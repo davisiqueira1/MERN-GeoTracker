@@ -78,6 +78,18 @@ function RegisterForm() {
       });
   };
 
+  const deleteAll = (e: FormEvent) => {
+    e.preventDefault();
+    backendAxios
+      .delete("/deliveries")
+      .then(() => {
+        location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const searchAdress = () => {
     const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
     googleAxios
@@ -128,6 +140,7 @@ function RegisterForm() {
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setWeight(Number.parseFloat(e.target.value));
         }}
+        type="number"
         placeholder="Weight"
         name="weight"
       />
@@ -160,11 +173,19 @@ function RegisterForm() {
       />
       <br />
       <input
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "darkcyan" }}
         className="form-button"
         type="reset"
         value="Reset fields"
         onClick={resetForm}
+      />
+      <br />
+      <input
+        style={{ backgroundColor: "red" }}
+        className="form-button"
+        type="submit"
+        value="Delete all records"
+        onClick={deleteAll}
       />
     </form>
   );

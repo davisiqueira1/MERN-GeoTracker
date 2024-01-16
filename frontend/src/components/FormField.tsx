@@ -2,10 +2,11 @@ import { ChangeEventHandler } from "react";
 
 interface IFormFieldProps {
   label: string;
-  placeholder?: string | undefined;
+  placeholder?: string;
   name: string;
   readOnly?: boolean;
-  value?: number | undefined;
+  value?: number;
+  type?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -15,6 +16,7 @@ function FormField({
   name,
   readOnly,
   value,
+  type,
   onChange,
 }: IFormFieldProps) {
   return (
@@ -23,6 +25,7 @@ function FormField({
       <input
         required
         className="field"
+        type={type || "text"}
         placeholder={placeholder}
         name={name}
         readOnly={readOnly}
