@@ -1,6 +1,7 @@
 import "./App.css";
 import Map from "./components/Map";
 import RegisterForm from "./components/RegisterForm";
+import Table from "./components/Table";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
         </div>
         <div id="map-container">
           <Map />
-          <div id="table-container"></div>
+          <div id="table-container">
+            <Table />
+          </div>
         </div>
       </div>
     </div>

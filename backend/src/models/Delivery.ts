@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const deliverieSchema = new Schema({
+const deliverySchema = new Schema({
   name: { type: String, required: true },
   weight: { type: Number, required: true },
   address: {
@@ -18,5 +18,5 @@ const deliverieSchema = new Schema({
   },
 });
 
-const deliverieModel = model("Deliverie", deliverieSchema);
-export { deliverieModel as Deliverie };
+const deliveryModel = model("Delivery", deliverySchema);
+export { deliveryModel as Delivery };
