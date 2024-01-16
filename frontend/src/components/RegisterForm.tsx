@@ -4,6 +4,8 @@ import { backendAxios, googleAxios } from "../services/axios";
 import { AxiosResponse } from "axios";
 import IDelivery from "../interface/IDelivery";
 import IAddressComponents from "../interface/IAddressComponents";
+import { useMap } from "react-leaflet";
+import L from "leaflet";
 
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number>(0);
@@ -69,7 +71,7 @@ function RegisterForm() {
     backendAxios
       .post("/deliveries", delivery)
       .then(() => {
-        console.log("Delivery registered", delivery);
+        location.reload();
       })
       .catch((err) => {
         console.log(err);

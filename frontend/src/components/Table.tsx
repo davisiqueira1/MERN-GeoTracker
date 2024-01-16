@@ -12,7 +12,6 @@ const DeliveryTable = () => {
     backendAxios
       .get("/deliveries")
       .then((response) => {
-        console.log(response.data);
         setDeliveries(response.data);
         setLoading(false);
       })
