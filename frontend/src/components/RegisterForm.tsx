@@ -159,7 +159,7 @@ function RegisterForm() {
       <FormField label="Longitude" value={longitude} name="lng" readOnly />
       <br />
       <input
-        style={{ backgroundColor: "grey" }}
+        style={{ backgroundColor: "#06BCC1" }}
         className="form-button"
         type="button"
         value="Search address"
@@ -167,14 +167,14 @@ function RegisterForm() {
       />
       <br />
       <input
-        style={{ backgroundColor: "green" }}
+        style={{ backgroundColor: "#52BA3D" }}
         className="form-button"
         type="submit"
         value="Register customer"
       />
       <br />
       <input
-        style={{ backgroundColor: "darkcyan" }}
+        style={{ backgroundColor: "#A97C73" }}
         className="form-button"
         type="reset"
         value="Reset fields"
@@ -182,7 +182,7 @@ function RegisterForm() {
       />
       <br />
       <input
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "#DF2935" }}
         className="form-button"
         type="submit"
         value="Delete all records"
