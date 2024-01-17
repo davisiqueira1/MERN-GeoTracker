@@ -44,12 +44,12 @@ const DeliveryTable = () => {
             <td>{delivery.address.street || "-"}</td>
             <td>{delivery.address.city || "-"}</td>
             <td>{delivery.address.country}</td>
-            <td>{delivery.weight.toPrecision(4).toString()}</td>
+            <td>{delivery.weight.toFixed(2).toString()}</td>
             <td>
-              {delivery.address.geolocation.latitude.toPrecision(6).toString()}
+              {delivery.address.geolocation.latitude.toFixed(4).toString()}
             </td>
             <td>
-              {delivery.address.geolocation.longitude.toPrecision(6).toString()}
+              {delivery.address.geolocation.longitude.toFixed(4).toString()}
             </td>
           </tr>
         ))}

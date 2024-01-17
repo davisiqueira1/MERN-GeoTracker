@@ -170,7 +170,7 @@ function RegisterForm() {
         style={{ backgroundColor: "#52BA3D" }}
         className="form-button"
         type="submit"
-        value="Register customer"
+        value="Register delivery"
       />
       <br />
       <input
