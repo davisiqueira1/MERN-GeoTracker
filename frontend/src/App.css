@@ -86,6 +86,38 @@ body {
   color: white;
 }
 
+@media screen and (max-height: 860px) {
+  #form-container {
+    justify-content: center;
+  }
+  #form {
+    display: inline-block;
+    height: fit-content;
+  }
+  .form-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-height: 720px) {
+  .form-button {
+    margin-top: 5px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #form-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  #map-container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .form-button:hover {
   cursor: pointer;
 }
