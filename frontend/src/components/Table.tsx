@@ -1,6 +1,7 @@
 import { backendAxios } from "../services/axios";
 import { Key, useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
+import "./Table.css";
 
 type DeliveryTableProps = IDelivery & { _id: Key };
 

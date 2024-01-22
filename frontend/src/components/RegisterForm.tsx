@@ -4,6 +4,7 @@ import { backendAxios, googleAxios } from "../services/axios";
 import { AxiosResponse } from "axios";
 import IDelivery from "../interface/IDelivery";
 import IAddressComponents from "../interface/IAddressComponents";
+import "./RegisterForm.css";
 
 function RegisterForm() {
   const [latitude, setLatitude] = useState<number>(0);
