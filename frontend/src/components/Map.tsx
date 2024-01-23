@@ -11,6 +11,7 @@ import { backendAxios } from "../services/axios";
 import { Key, useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
 import { LatLngTuple } from "leaflet";
+import "./Map.css";
 
 type DeliveryTableProps = IDelivery & { _id: Key };
 

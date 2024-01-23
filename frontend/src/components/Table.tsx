@@ -1,6 +1,7 @@
 import { backendAxios } from "../services/axios";
 import { Key, useEffect, useState } from "react";
 import IDelivery from "../interface/IDelivery";
+import "./Table.css";
 
 type DeliveryTableProps = IDelivery & { _id: Key };
 
@@ -41,12 +42,16 @@ const DeliveryTable = () => {
         {deliveries.map((delivery: DeliveryTableProps) => (
           <tr key={delivery._id}>
             <td>{delivery.name}</td>
-            <td>{delivery.address.street}</td>
-            <td>{delivery.address.city}</td>
+            <td>{delivery.address.street || "-"}</td>
+            <td>{delivery.address.city || "-"}</td>
             <td>{delivery.address.country}</td>
-            <td>{delivery.weight.toString()}</td>
-            <td>{delivery.address.geolocation.latitude.toString()}</td>
-            <td>{delivery.address.geolocation.longitude.toString()}</td>
+            <td>{delivery.weight.toFixed(2).toString()}</td>
+            <td>
+              {delivery.address.geolocation.latitude.toFixed(4).toString()}
+            </td>
+            <td>
+              {delivery.address.geolocation.longitude.toFixed(4).toString()}
+            </td>
           </tr>
         ))}
       </tbody>

@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from "react";
+import "./FormField.css";
 
 interface IFormFieldProps {
   label: string;
@@ -7,6 +8,7 @@ interface IFormFieldProps {
   readOnly?: boolean;
   value?: number;
   type?: string;
+  step?: number;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -17,6 +19,7 @@ function FormField({
   readOnly,
   value,
   type,
+  step,
   onChange,
 }: IFormFieldProps) {
   return (
@@ -26,6 +29,7 @@ function FormField({
         required
         className="field"
         type={type || "text"}
+        step={step}
         placeholder={placeholder}
         name={name}
         readOnly={readOnly}
